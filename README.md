@@ -1,1 +1,1 @@
-Simple Node.js project to polish and understand design patterns.
+Project to understand design patterns, improve skills with Node.js and testing.
