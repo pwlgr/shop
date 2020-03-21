@@ -7,7 +7,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
 	res.send(`
     <div>
-        hello
+        <form method="POST">
+            <input name="email" type="text" placeholder="Login">
+            <input name="password" type="password" placeholder="Password">
+            <input name="passwordConfirm" type="password" placeholder="Password">
+            <button type="submit">Sign up</button>
+        </form>
     </div>
     `);
 });
