@@ -1,4 +1,5 @@
 const fs = require('fs');
+const crypto = require('crypto');
 
 class UsersRepository {
 	constructor(filename) {
@@ -15,6 +16,44 @@ class UsersRepository {
 	async getAll() {
 		return JSON.parse(await fs.promises.readFile(this.filename, { encoding: 'utf8' }));
 	}
+	async create(attrs) {
+		attrs.id = this.generateId();
+		const records = await this.getAll();
+		records.push(attrs);
+		await this.writeAll(records);
+	}
+	async writeAll(records) {
+		await fs.promises.writeFile(this.filename, JSON.stringify(records, null, 2));
+	}
+	generateId() {
+		return crypto.randomBytes(4).toString('hex');
+	}
+	async getOne(id) {
+		const records = await this.getAll();
+		return records.find((record) => record.id === id);
+	}
+	async delete(id) {
+		const records = await this.getAll();
+		const filteredRecords = records.filter((record) => record.id !== id);
+		await this.writeAll(filteredRecords);
+	}
+	async update(id, attrs) {
+		let records = await this.getAll();
+		let record = records.find((record) => record.id === id);
+		if (!record) {
+			throw new Error(`Records with ${id} id was not found.`);
+		}
+		let updatedRecords = records.map((record) => (record.id === id ? { ...record, ...attrs } : record));
+		await this.writeAll(updatedRecords);
+	}
 }
 
-const repo = new UsersRepository('users.json');
+const test = async () => {
+	const repo = new UsersRepository('users.json');
+	// await repo.create({
+	// 	email: 'asd@wp.pl'
+	// });
+	await repo.update('8c0ee881', { password: 'newpassword' });
+};
+
+test();
