@@ -1,5 +1,17 @@
 [
-	{
-		"email": "asd@asd.com"
-	}
+  {
+    "email": "asd@wp.pl",
+    "password": "z",
+    "id": "0be69d55"
+  },
+  {
+    "email": "www@mail.com",
+    "password": "ww",
+    "id": "e6a79244"
+  },
+  {
+    "email": "asd@asd.pl",
+    "password": "asd",
+    "id": "7016f839"
+  }
 ]
