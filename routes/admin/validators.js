@@ -23,7 +23,6 @@ module.exports = {
 		.withMessage('Must be between 4 and 20 characters.')
 		.custom(async (passwordConfirm, { req }) => {
 			if (passwordConfirm !== req.body.password) {
-				console.log('but erro! :)');
 				throw new Error('Passwords must match.');
 			}
 		})
