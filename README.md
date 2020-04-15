@@ -1,1 +1,1 @@
-Project to understand design patterns, improve skills with Node.js and testing.
+Project to understand design patterns and improve skills with Node.js.
